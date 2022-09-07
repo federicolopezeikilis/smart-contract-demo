@@ -27,18 +27,19 @@ async function read() {
   console.log("The message is: " + message);
 }
 
-//read();
-
-async function write() {
-  const tx = await helloWorldContract.update("Ki si io");
-  console.log(tx);
+async function write(string) {
+  const tx = await helloWorldContract.update(string);
 
   const receipt = await tx.wait();
-
-  console.log(receipt);
-
-  const newMessage = await helloWorldContract.message();
-  console.log("The new message is: " + newMessage);
 }
 
-write();
+(async () => {
+  console.log("reading message...");
+  await read();
+
+  console.log("updating message...");
+  await write("hasta pronto...");
+
+  console.log("reading new message...");
+  await read();
+})();
